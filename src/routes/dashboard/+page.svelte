@@ -1,11 +1,11 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
+	import FileList from '$lib/components/FileList.svelte';
 	import Header from '$lib/components/Header.svelte';
 	import Navigation from '$lib/components/Nav/Navigation.svelte';
 	import Search from '$lib/components/Search.svelte';
 	let userInitial = 'MJ'; // to be replaced with user's initials
-	// to store updated files
-	let files: any[] = [];
+	let files: any[] = []; // Store the uploaded files
 
 	//handle file input change
 	function handleFileChange(event: Event) {
@@ -34,30 +34,20 @@
 			<!-- Button to add files -->
 			<div class="mt-4">
 				<Button label="+ Add files" fullWidth={false} onClick={triggerFileInput} />
+
+				<!-- File input -->
+				<input
+					type="file"
+					id="file-input"
+					accept=".csv,.xlsx,.json,.xls, .pdf, .doc, .docx"
+					multiple
+					class="hidden"
+					on:change={handleFileChange}
+				/>
 			</div>
-			<!-- File input -->
-			<input
-				type="file"
-				id="file-input"
-				accept=".csv,.xlsx,.json,.xls, .pdf, .doc, .docx"
-				multiple
-				class="hidden"
-				on:change={handleFileChange}
-			/>
 
 			<!-- Display the list of uploaded files -->
-			<div class="mt-6">
-				{#if files.length > 0}
-					<ul>
-						{#each files as file}
-							<li class="mb-2 text-gray-700">{file.name}</li>
-						{/each}
-					</ul>
-				{/if}
-				{#if files.length === 0}
-					<p class="text-gray-500">No files uploaded yet.</p>
-				{/if}
-			</div>
+			<FileList {files} />
 		</section>
 	</div>
 </main>
