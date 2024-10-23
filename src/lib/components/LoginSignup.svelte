@@ -1,0 +1,78 @@
+<script lang="ts">
+	let isLogin = false;
+
+	let email = '';
+	let password = '';
+	let confirmPassword = ''; // For Sign-Up
+
+	let error: null = null;
+
+	function toggleForm() {
+		isLogin = !isLogin;
+		error = null;
+		email = '';
+		password = '';
+		confirmPassword = '';
+	}
+
+	function handleFormSubmit() {
+		event.preventDefault();
+	}
+</script>
+
+<main class="max-w-md mx-auto mt-20 bg-white p-8 rounded shadow-lg">
+	<h2 class="text-2xl text-center mb-6">{isLogin ? 'Login' : 'Sign Up'}</h2>
+
+	{#if error}
+		<p class="text-red-500 mb-4 text-center">{error}</p>
+	{/if}
+
+	<form on:submit={handleFormSubmit}>
+		<div class="mb-4">
+			<label for="email" class="block mb-2">Email</label>
+			<input
+				type="email"
+				id="email"
+				bind:value={email}
+				required
+				class="w-full p-2 border rounded"
+			/>
+		</div>
+
+		<div class="mb-4">
+			<label for="password" class="block mb-2">Password</label>
+			<input
+				type="password"
+				id="password"
+				bind:value={password}
+				required
+				class="w-full p-2 border rounded"
+			/>
+		</div>
+		<!--If is sign up-->
+		{#if !isLogin}
+			<div class="mb-4">
+				<label for="confirm-password" class="block mb-2">Confirm Password</label>
+				<input
+					type="password"
+					id="confirm-password"
+					bind:value={confirmPassword}
+					required
+					class="w-full p-2 border rounded"
+				/>
+			</div>
+		{/if}
+
+		<p class="text-red-500 text-xs italic mb-2">
+			<button type="submit" class="w-full bg-blue-500 text-white py-2 rounded">
+				{isLogin ? 'Login' : 'Sign Up'}
+			</button>
+		</p>
+	</form>
+
+	<p class="text-center mt-4">
+		<button class="text-blue-500 underline" on:click={toggleForm}>
+			{isLogin ? 'Create an account' : 'Already have an account?'}
+		</button>
+	</p>
+</main>
