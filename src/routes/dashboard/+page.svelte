@@ -1,9 +1,14 @@
 <script>
+	import Button from '$lib/components/Button.svelte';
 	import Header from '$lib/components/Header.svelte';
 	import Navigation from '$lib/components/Nav/Navigation.svelte';
 	import Search from '$lib/components/Search.svelte';
 	let userInitial = 'MJ';
 	let user = 'MeeraJulz';
+
+	function handleAddFiles() {
+		console.log('Add files');
+	}
 </script>
 
 <main class="h-screen flex flex-col bg-gray-200">
@@ -19,11 +24,7 @@
 
 			<!-- Button to add files -->
 			<div class="mt-4">
-				<button
-					class="bg-blue-500 text-white py-2 px-4 rounded shadow hover:bg-blue-600 focus:outline-none"
-				>
-					+ Add Files
-				</button>
+				<Button label="+ Add files" fullWidth={false} onClick={handleAddFiles} />
 			</div>
 		</section>
 	</div>

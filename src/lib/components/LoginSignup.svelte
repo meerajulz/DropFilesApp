@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import Button from './Button.svelte';
 	import Logo from './Logo.svelte';
 
 	let isLogin = true;
@@ -72,9 +73,7 @@
 		{/if}
 
 		<p class="text-red-500 text-xs italic mb-2">
-			<button type="submit" class="w-full bg-blue-500 text-white py-2 rounded">
-				{isLogin ? 'Login' : 'Sign Up'}
-			</button>
+			<Button type="submit" label={isLogin ? 'Login' : 'Sign Up'} fullWidth />
 		</p>
 	</form>
 
