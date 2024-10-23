@@ -1,9 +1,10 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
+	import Button from '$lib/components/ui/Button.svelte';
+	import Header from '$lib/components/ui/Header.svelte';
+	import Navigation from '$lib/components/nav/Navigation.svelte';
+	import Search from '$lib/components/ui/Search.svelte';
 	import FileList from '$lib/components/FileList.svelte';
-	import Header from '$lib/components/Header.svelte';
-	import Navigation from '$lib/components/Nav/Navigation.svelte';
-	import Search from '$lib/components/Search.svelte';
+
 	let userInitial = 'MJ'; // to be replaced with user's initials
 	let files: any[] = []; // Store the uploaded files
 

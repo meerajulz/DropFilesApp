@@ -1,9 +1,12 @@
 <script lang="ts">
+	import { formatFileSize, formatDate } from '$lib/utils/helpers.js';
+	import DragDrop from './ui/DragDrop.svelte';
 	// to store updated files
 	export let files: any[] = [];
 	let selectedFile: null = null;
+	//	let isDragging = false; // Flag to track when a file is being dragged over the drop area
 
-	//function to handle file selection
+	//Handle file selection
 	function selectFile(file: null) {
 		selectedFile = file;
 	}
@@ -19,32 +22,23 @@
 		}
 	}
 
-	// Helper to format the file size
-	function formatFileSize(size: number) {
-		const i = size === 0 ? 0 : Math.floor(Math.log(size) / Math.log(1024));
-		const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-		return size === 0 ? '0 Bytes' : (size / Math.pow(1024, i)).toFixed(2) + ' ' + sizes[i];
-	}
-
-	// Helper to format the date
-	function formatDate(date: Date) {
-		return new Date(date).toLocaleDateString('en-US', {
-			year: 'numeric',
-			month: 'long',
-			day: 'numeric'
-		});
+	// Handle file drop event from DragDrop Component
+	function handleFilesDropped(event: { detail: any }) {
+		files = [...files, ...event.detail]; // Add the dropped files to the list
 	}
 </script>
 
 <div class="mt-6">
-	<!-- Titles Row -->
-	<div class="flex justify-between font-bold text-gray-700 border-b border-gray-300 pb-2">
-		<div class="flex-1">File Name</div>
-		<div class="w-32 text-right">Size</div>
-		<div class="w-48 text-right">Date Added</div>
-	</div>
+	<!-- Drag and Drop Area -->
+	<DragDrop on:filesDropped={handleFilesDropped} />
 
 	{#if files.length > 0}
+		<!-- Titles Row -->
+		<div class="flex justify-between font-bold text-gray-700 border-b border-gray-300 pb-2">
+			<div class="flex-1">File Name</div>
+			<div class="w-32 text-right">Size</div>
+			<div class="w-48 text-right">Date Added</div>
+		</div>
 		<ul>
 			{#each files as file}
 				<!-- svelte-ignore a11y_no_noninteractive_element_to_interactive_role -->
@@ -72,7 +66,10 @@
 			{/each}
 		</ul>
 	{/if}
-	{#if files.length === 0}
-		<p class="text-gray-500">No files uploaded yet.</p>
-	{/if}
+
+	<div class="flex justify-center items-center h-full">
+		{#if files.length === 0}
+			<p class="text-gray-500">No files uploaded yet.</p>
+		{/if}
+	</div>
 </div>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Button from './Button.svelte';
-	import Logo from './Logo.svelte';
+	import Button from './ui/Button.svelte';
+	import Logo from './ui/Logo.svelte';
 
 	let isLogin = true;
 
@@ -19,7 +19,7 @@
 		confirmPassword = '';
 	}
 
-	function handleFormSubmit() {
+	function handleFormSubmit(event: { preventDefault: () => void }) {
 		event.preventDefault();
 
 		// Assuming the login was successful, redirect to the dashboard

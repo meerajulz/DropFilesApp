@@ -1,5 +1,6 @@
 <script lang="ts">
-	import Logo from './Logo.svelte';
+	import Logo from '../ui/Logo.svelte';
+
 	export let userInitial: string = ''; // Default initial value for now, will be set later
 </script>
 
