@@ -1,5 +1,8 @@
 <script lang="ts">
-	let isLogin = false;
+	import { goto } from '$app/navigation';
+	import Logo from './Logo.svelte';
+
+	let isLogin = true;
 
 	let email = '';
 	let password = '';
@@ -17,11 +20,16 @@
 
 	function handleFormSubmit() {
 		event.preventDefault();
+
+		// Assuming the login was successful, redirect to the dashboard
+		goto('/dashboard');
 	}
 </script>
 
 <main class="max-w-md mx-auto mt-20 bg-white p-8 rounded shadow-lg">
-	<h2 class="text-2xl text-center mb-6">{isLogin ? 'Login' : 'Sign Up'}</h2>
+	<Logo />
+
+	<h2 class="text-2xl text-center mb-6">{isLogin ? 'Log in' : 'Sign Up'}</h2>
 
 	{#if error}
 		<p class="text-red-500 mb-4 text-center">{error}</p>
