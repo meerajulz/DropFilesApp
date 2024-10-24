@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	let isDragging = false; // Flag to track when a file is being dragged over the drop area
+	import type { FileData } from '$lib/utils/types'; // Import your FileData type
 
+	let isDragging = false; // Flag to track when a file is being dragged over the drop area
 	const dispatch = createEventDispatcher();
 
 	// Handle file input change from the drop area
@@ -9,7 +10,12 @@
 		event.preventDefault();
 		const droppedFiles = event.dataTransfer?.files;
 		if (droppedFiles) {
-			const newFiles = Array.from(droppedFiles);
+			const newFiles: FileData[] = Array.from(droppedFiles).map((file) => ({
+				name: file.name,
+				size: file.size,
+				lastModified: file.lastModified
+			}));
+			// Emit the FileData objects to the parent component
 			dispatch('filesDropped', newFiles); // Emit the files to the parent component
 		}
 		isDragging = false; // Reset dragging flag

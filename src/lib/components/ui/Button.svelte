@@ -1,9 +1,8 @@
 <script lang="ts">
 	export let type: 'button' | 'submit' | 'reset' | null | undefined = 'button';
-
 	export let label: string = '';
 	export let fullWidth: boolean = false;
-	export let onClick: any = null;
+	export let onClick: ((event: MouseEvent) => void) | null = null;
 </script>
 
 <button

@@ -1,9 +1,13 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
 	import { formatFileSize, formatDate } from '$lib/utils/helpers.js';
 	import DragDrop from './ui/DragDrop.svelte';
+	import type { FileData } from '$lib/utils/types';
 
-	export let files: any[] = [];
+	export let files: FileData[] = [];
 	let selectedFile: null = null;
+
+	const dispatch = createEventDispatcher();
 
 	//Handle file selection
 	function selectFile(file: null) {
@@ -21,9 +25,14 @@
 		}
 	}
 
-	// Handle file drop event from DragDrop Component
-	function handleFilesDropped(event: { detail: any }) {
-		files = [...files, ...event.detail]; // Add the dropped files to the list
+	// // Handle file drop event from DragDrop Component
+	// function handleFilesDropped(event: { detail: FileData[] }) {
+	// 	files = [...files, ...event.detail]; // Add the dropped files to the list
+	// }
+
+	// Handle file drop event from DragDrop Component and emit it to the parent
+	function handleFilesDropped(event: { detail: FileData[] }) {
+		dispatch('filesDropped', event.detail); // Emit the dropped files to the parent (main page)
 	}
 </script>
 

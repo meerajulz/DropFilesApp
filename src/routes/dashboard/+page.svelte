@@ -4,11 +4,12 @@
 	import Navigation from '$lib/components/nav/Navigation.svelte';
 	import Search from '$lib/components/ui/Search.svelte';
 	import FileList from '$lib/components/FileList.svelte';
+	import type { FileData } from '$lib/utils/types';
 
 	let userInitial = 'MJ'; // to be replaced with user's initials
-	let files: any[] = []; // Store the uploaded files
+	let files: FileData[] = []; // Store the uploaded files
 	let searchTerm = ''; // Store the search term
-	let filteredFiles: any = files; // Files to display after filtering
+	let filteredFiles: FileData[] = files; // Files to display after filtering
 
 	//Handle file input change
 	function handleFileChange(event: Event) {
@@ -17,6 +18,13 @@
 		files = [...files, ...selectedFiles];
 		filterFiles(); // Apply filtering after adding new files
 	}
+
+	// Handle files dropped via FileList's drag-drop event
+	function handleFilesDropped(event: { detail: FileData[] }) {
+		files = [...files, ...event.detail];
+		filterFiles(); // Apply filtering after adding new files
+	}
+
 	//Trigger file input from button click
 	function triggerFileInput() {
 		document.getElementById('file-input')?.click();
@@ -60,7 +68,7 @@
 			</div>
 
 			<!-- Display the list of uploaded files -->
-			<FileList files={filteredFiles} />
+			<FileList files={filteredFiles} on:filesDropped={handleFilesDropped} />
 		</section>
 	</div>
 </main>
