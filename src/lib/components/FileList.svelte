@@ -1,35 +1,29 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import { formatFileSize, formatDate } from '$lib/utils/helpers.js';
+	import { formatFileSize, formatDate, truncateFileName } from '$lib/utils/helpers.js';
 	import DragDrop from './ui/DragDrop.svelte';
 	import type { FileData } from '$lib/utils/types';
 
 	export let files: FileData[] = [];
-	let selectedFile: null = null;
+	let selectedFile: FileData | null = null;
 
 	const dispatch = createEventDispatcher();
 
 	//Handle file selection
-	function selectFile(file: null) {
+	function selectFile(file: FileData | null) {
 		selectedFile = file;
 	}
 
 	// Handle keyboard interaction (Enter or Space)
 	function handleKeyDown(
 		event: KeyboardEvent & { currentTarget: EventTarget & HTMLLIElement },
-		file: null
+		file: FileData | null
 	) {
 		if (event.key === 'Enter' || event.key === ' ') {
 			event.preventDefault();
 			selectFile(file);
 		}
 	}
-
-	// // Handle file drop event from DragDrop Component
-	// function handleFilesDropped(event: { detail: FileData[] }) {
-	// 	files = [...files, ...event.detail]; // Add the dropped files to the list
-	// }
-
 	// Handle file drop event from DragDrop Component and emit it to the parent
 	function handleFilesDropped(event: { detail: FileData[] }) {
 		dispatch('filesDropped', event.detail); // Emit the dropped files to the parent (main page)
@@ -51,7 +45,7 @@
 			{#each files as file}
 				<!-- svelte-ignore a11y_no_noninteractive_element_to_interactive_role -->
 				<li
-					class="flex justify-between items-center py-2 pl-2 border-b border-gray-300 text-gray-700 hover:bg-gray-100 cursor-pointer transition-colors duration-200 ease-in-out {selectedFile ===
+					class="flex justify-between items-center py-2 pl-2 pr-2 border-b border-gray-300 text-gray-700 hover:bg-gray-100 cursor-pointer transition-colors duration-200 ease-in-out {selectedFile ===
 					file
 						? 'bg-blue-200'
 						: ''}"
@@ -62,7 +56,7 @@
 					aria-pressed={selectedFile === file ? 'true' : 'false'}
 				>
 					<div class="flex-1 truncate">
-						{file.name}
+						{truncateFileName(file.name)}
 					</div>
 					<div class="w-32 text-sm text-gray-500 text-right">
 						{formatFileSize(file.size)}

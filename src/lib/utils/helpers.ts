@@ -13,3 +13,10 @@ export function formatDate(date: number): string {
 		day: 'numeric'
 	});
 }
+// Function to truncate long file names
+export function truncateFileName(name: string, maxLength: number = 50): string {
+	if (name.length > maxLength) {
+		return name.slice(0, maxLength) + '...';
+	}
+	return name;
+}
