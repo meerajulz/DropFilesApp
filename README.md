@@ -1,24 +1,45 @@
-# create-svelte
+# DropFilesApp
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+**DropFilesApp** is a modern file management web application built with SvelteKit and Tailwind CSS. It allows users to upload, search, and manage files with a drag-and-drop interface, providing a smooth and intuitive user experience. The app is designed to be modular, reusable, and highly responsive, making it a perfect solution for users looking to manage their files efficiently.
 
-Read more about creating a library [in the docs](https://svelte.dev/docs/kit/packaging).
+## Features:
 
-## Creating a project
+- **Drag-and-Drop File Upload**: Upload files easily by dragging and dropping them into the app.
+- **File Search**: Quickly search for files using a dynamic search bar that filters files in real-time.
+- **File List Management**: View uploaded files with details like name, size, and date added.
+- **Responsive Design**: Optimized for both desktop and mobile devices using Tailwind CSS.
+- **Modular Components**: Clean and reusable component structure for easier scalability.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Project Structure
 
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+```
+src/
+├── assets/
+├── lib/
+│   └── components/
+│       ├── nav/
+│       │   ├── Navigation.svelte
+│       │   └── NavItem.svelte
+│       ├── ui/
+│       │   ├── Button.svelte
+│       │   ├── DragDrop.svelte
+│       │   ├── Header.svelte
+│       │   ├── Logo.svelte
+│       │   ├── Search.svelte
+│       │   ├── FileList.svelte
+│       │   └── LoginSignup.svelte
+│       └── utils/
+│           └── index.ts
+├── routes/
+│   ├── dashboard/
+│   │   ├── +page.svelte
+│   │   └── +layout.svelte
+│   └── +page.svelte
 ```
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Once you've cloned the repository and installed dependencies with `npm install`, you can start a development server:
 
 ```bash
 npm run dev
@@ -27,32 +48,18 @@ npm run dev
 npm run dev -- --open
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
-
 ## Building
 
-To build your library:
-
-```bash
-npm run package
-```
-
-To create a production version of your showcase app:
+To create a production version of the app:
 
 ```bash
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
-
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
+You can preview the production build with:
 
 ```bash
-npm publish
+npm run preview
 ```
+
+> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs#adapters) for your target environment.
