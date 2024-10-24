@@ -10,6 +10,6 @@
 		<span class="mr-3">
 			<Icon src={icon} class="h-6 w-6" />
 		</span>
-		{label}
+		<span class="hidden sm:block"> {label}</span>
 	</a>
 </li>

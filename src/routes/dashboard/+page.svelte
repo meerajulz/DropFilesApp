@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/components/ui/Button.svelte';
 	import Header from '$lib/components/ui/Header.svelte';
-	import Navigation from '$lib/components/nav/Navigation.svelte';
+	import Navigation from '$lib/components/Nav/Navigation.svelte';
 	import Search from '$lib/components/ui/Search.svelte';
 	import FileList from '$lib/components/FileList.svelte';
 	import type { FileData } from '$lib/utils/types';
@@ -47,7 +47,7 @@
 	<Header {userInitial} />
 
 	<div class="flex flex-grow">
-		<aside class="w-1/4 bg-gray-200 p-4 mt-3">
+		<aside class="sm:w-1/4 ss:w-1/6 bg-gray-200 p-4 mt-3">
 			<Navigation />
 		</aside>
 
@@ -72,6 +72,3 @@
 		</section>
 	</div>
 </main>
-
-<style>
-</style>
