@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Icon, XMark, MagnifyingGlass } from 'svelte-hero-icons';
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 	let searchTerm = ''; // hold the search term
@@ -33,38 +34,15 @@
 				on:click={clearSearch}
 				aria-label="Clear search"
 			>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke="currentColor"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M6 18L18 6M6 6l12 12"
-					/>
-				</svg>
+				<Icon src={XMark} class="h-5 w-5 text-gray-500 hover:text-gray-700 transition-colors" />
 			</button>
 		{/if}
 
 		{#if searchTerm === ''}
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				class="h-5 w-5 text-gray-500"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke="currentColor"
-				style="color: #4a4a4a;"
-			>
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M11 4a7 7 0 017 7 7 7 0 01-7 7 7 7 0 01-7-7 7 7 0 017-7zm0 0v.01M21 21l-4.35-4.35"
-				/>
-			</svg>
+			<Icon
+				src={MagnifyingGlass}
+				class="h-5 w-5 text-gray-500 hover:text-gray-700 transition-colors"
+			/>
 		{/if}
 	</div>
 </div>

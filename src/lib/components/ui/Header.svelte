@@ -5,8 +5,8 @@
 </script>
 
 <header class="bg-gray-200 shadow-md text-blue p-4 flex justify-between items-center">
-	<div class="flex items-center">
-		<Logo />
+	<div class="flex items-center text-grey-400">
+		<Logo /> DropFile
 	</div>
 	<div class="flex items-center">
 		<span
