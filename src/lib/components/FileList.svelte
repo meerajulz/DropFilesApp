@@ -62,9 +62,10 @@
 	{#if files.length > 0}
 		<!-- Titles Row -->
 		<div class="flex justify-between font-bold text-gray-700 border-b border-gray-300 pb-2">
-			<div class="flex-1">File Name</div>
-			<div class="w-32 text-right">Size</div>
-			<div class="w-48 text-right">Date Added</div>
+			<div class="w-1/2">File Name</div>
+			<div class="w-1/3 text-right">Size</div>
+			<div class="w-1/3 text-right">Date Added</div>
+			<div class="w-1/6 text-right hidded"></div>
 		</div>
 		<ul>
 			{#each files as file}
@@ -80,16 +81,16 @@
 					role="button"
 					aria-pressed={selectedFile === file ? 'true' : 'false'}
 				>
-					<div class="flex-1 truncate">
+					<div class="w-1/2 truncate">
 						{truncateFileName(file.name)}
 					</div>
-					<div class="w-32 text-sm text-gray-500 text-right">
+					<div class="w-1/3 text-sm text-gray-500 text-right">
 						{formatFileSize(file.size)}
 					</div>
-					<div class="w-48 text-sm text-gray-500 text-right">
+					<div class="w-1/3 text-sm text-right text-gray-500">
 						{formatDate(file.lastModified)}
 					</div>
-					<div class="text-right">
+					<div class="w-1/6 text-right">
 						<button class="ml-4" on:click={() => deleteFile(file)} aria-label="Delete file">
 							<Icon
 								src={Trash}
