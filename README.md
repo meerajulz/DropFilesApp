@@ -48,6 +48,22 @@ npm run dev
 npm run dev -- --open
 ```
 
+# Run ESLint to check for code quality issues
+
+npm run lint
+
+# Run Prettier to format the codebase
+
+npm run format
+
+# Run all unit tests
+
+npx vitest run
+
+# Run tests with coverage
+
+npx vitest run --coverage
+
 ## Building
 
 To create a production version of the app:
