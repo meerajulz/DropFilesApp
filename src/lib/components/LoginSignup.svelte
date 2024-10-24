@@ -7,8 +7,7 @@
 
 	let email = '';
 	let password = '';
-	let confirmPassword = ''; // For Sign-Up
-
+	let confirmPassword = '';
 	let error: null = null;
 
 	function toggleForm() {
@@ -31,10 +30,6 @@
 	<Logo />
 
 	<h2 class="text-2xl text-center mb-6">{isLogin ? 'Log in' : 'Sign Up'}</h2>
-
-	{#if error}
-		<p class="text-red-500 mb-4 text-center">{error}</p>
-	{/if}
 
 	<form on:submit={handleFormSubmit}>
 		<div class="mb-4">

@@ -1,7 +1,7 @@
 {
 	"extends": "./.svelte-kit/tsconfig.json",
 	"compilerOptions": {
-		"types": ["svelte", "node"],
+		"types": ["svelte", "node", "jest"],
 		"strict": true,
 		"moduleResolution": "node",
 		"esModuleInterop": true

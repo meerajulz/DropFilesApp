@@ -15,8 +15,9 @@ export function formatDate(date: number): string {
 }
 // Function to truncate long file names
 export function truncateFileName(name: string, maxLength: number = 50): string {
+	const ellipsis = '...';
 	if (name.length > maxLength) {
-		return name.slice(0, maxLength) + '...';
+		return name.slice(0, maxLength - ellipsis.length) + ellipsis;
 	}
 	return name;
 }

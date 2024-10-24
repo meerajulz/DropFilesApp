@@ -41,6 +41,7 @@
 		{#if searchTerm === ''}
 			<Icon
 				src={MagnifyingGlass}
+				aria-label="Magnifying Glass icon"
 				class="h-5 w-5 text-gray-500 hover:text-gray-700 transition-colors"
 			/>
 		{/if}
