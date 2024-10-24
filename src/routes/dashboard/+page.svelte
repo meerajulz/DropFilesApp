@@ -7,17 +7,31 @@
 
 	let userInitial = 'MJ'; // to be replaced with user's initials
 	let files: any[] = []; // Store the uploaded files
+	let searchTerm = ''; // Store the search term
+	let filteredFiles: any = files; // Files to display after filtering
 
-	//handle file input change
+	//Handle file input change
 	function handleFileChange(event: Event) {
 		const input = event.target as HTMLInputElement;
 		const selectedFiles = Array.from(input.files || []);
 		files = [...files, ...selectedFiles];
-		console.log(files);
+		filterFiles(); // Apply filtering after adding new files
 	}
-	//trigger file input from button click
+	//Trigger file input from button click
 	function triggerFileInput() {
 		document.getElementById('file-input')?.click();
+	}
+	// Handle search term change from Search component
+	function handleSearch(event: { detail: string }) {
+		searchTerm = event.detail;
+		filterFiles();
+	}
+
+	// Filter the files based on the search term
+	function filterFiles() {
+		filteredFiles = files.filter((file) =>
+			file.name.toLowerCase().includes(searchTerm.toLowerCase())
+		);
 	}
 </script>
 
@@ -30,13 +44,11 @@
 		</aside>
 
 		<section class="flex-grow p-6 rounded-lg bg-white mt-3 mr-6">
-			<Search />
+			<Search on:search={handleSearch} />
 
 			<!-- Button to add files -->
 			<div class="mt-4">
 				<Button label="+ Add files" fullWidth={false} onClick={triggerFileInput} />
-
-				<!-- File input -->
 				<input
 					type="file"
 					id="file-input"
@@ -48,7 +60,7 @@
 			</div>
 
 			<!-- Display the list of uploaded files -->
-			<FileList {files} />
+			<FileList files={filteredFiles} />
 		</section>
 	</div>
 </main>

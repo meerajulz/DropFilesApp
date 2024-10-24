@@ -1,11 +1,25 @@
+<script lang="ts">
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
+	let searchTerm = ''; // hold the search term
+
+	//Emit the search term whenever the input changes
+	function handleInputChange(event: Event) {
+		searchTerm = (event.target as HTMLInputElement).value;
+		console.log(searchTerm);
+		dispatch('search', searchTerm);
+	}
+</script>
+
 <div class="relative w-full">
 	<input
 		type="text"
 		placeholder="Search Files"
 		class="w-full px-4 py-2 border rounded bg-gray-200 text-gray-600 focus:outline-none"
+		bind:value={searchTerm}
+		on:input={handleInputChange}
 	/>
 	<div class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-		<!-- Heroicons Search Icon -->
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			class="h-5 w-5 text-gray-500"

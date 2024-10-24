@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { formatFileSize, formatDate } from '$lib/utils/helpers.js';
 	import DragDrop from './ui/DragDrop.svelte';
-	// to store updated files
+
 	export let files: any[] = [];
 	let selectedFile: null = null;
-	//	let isDragging = false; // Flag to track when a file is being dragged over the drop area
 
 	//Handle file selection
 	function selectFile(file: null) {
