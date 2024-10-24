@@ -50,19 +50,27 @@ npm run dev -- --open
 
 ## Run ESLint to check for code quality issues
 
+```bash
 npm run lint
+```
 
 ## Run Prettier to format the codebase
 
+```bash
 npm run format
+```
 
 ## Run all unit tests
 
+```bash
 npx vitest run
+```
 
 ## Run tests with coverage
 
+```bash
 npx vitest run --coverage
+```
 
 ## Building
 
