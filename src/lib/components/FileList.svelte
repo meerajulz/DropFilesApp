@@ -1,11 +1,17 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import { formatFileSize, formatDate, truncateFileName } from '$lib/utils/helpers.js';
+	import { Icon, Trash } from 'svelte-hero-icons';
 	import DragDrop from './ui/DragDrop.svelte';
+	import Alert from '../components/ui/Alert.svelte';
+
 	import type { FileData } from '$lib/utils/types';
 
 	export let files: FileData[] = [];
 	let selectedFile: FileData | null = null;
+	let showAlert = false;
+	let alertMessage = '';
+	let alertType: 'success' | 'error' = 'success';
 
 	const dispatch = createEventDispatcher();
 
@@ -28,9 +34,28 @@
 	function handleFilesDropped(event: { detail: FileData[] }) {
 		dispatch('filesDropped', event.detail); // Emit the dropped files to the parent (main page)
 	}
+
+	// Handle file deletion with AlertComponent
+	function deleteFile(file: FileData) {
+		files = files.filter((f) => f !== file);
+		dispatch('fileDeleted', file); // Emit the deleted file to the parent (main page)
+
+		//show success Alert
+		alertMessage = `File "${file.name}" deleted successfully.`;
+		alertType = 'success';
+		showAlert = true;
+
+		//hide alert after 3 seconds
+		setTimeout(() => {
+			showAlert = false;
+		}, 3000);
+	}
 </script>
 
 <div class="mt-6">
+	<!-- Reusable Alert Component -->
+	<Alert message={alertMessage} type={alertType} isVisible={showAlert} />
+
 	<!-- Drag and Drop Area -->
 	<DragDrop on:filesDropped={handleFilesDropped} />
 
@@ -63,6 +88,14 @@
 					</div>
 					<div class="w-48 text-sm text-gray-500 text-right">
 						{formatDate(file.lastModified)}
+					</div>
+					<div class="text-right">
+						<button class="ml-4" on:click={() => deleteFile(file)} aria-label="Delete file">
+							<Icon
+								src={Trash}
+								class="h-5 w-5 text-gray-900 hover:text-blue-600 transition-colors duration-200 ease-in-out"
+							/>
+						</button>
 					</div>
 				</li>
 			{/each}
