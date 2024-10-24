@@ -24,7 +24,6 @@ describe('Button Component', () => {
 			}
 		});
 
-		// Check if the button has the correct type
 		expect(getByRole('button')).toHaveAttribute('type', 'submit');
 	});
 

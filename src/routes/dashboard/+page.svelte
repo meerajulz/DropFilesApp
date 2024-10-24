@@ -56,7 +56,12 @@
 
 			<!-- Button to add files -->
 			<div class="mt-4">
-				<Button label="+ Add files" fullWidth={false} onClick={triggerFileInput} />
+				<Button
+					customStyles="bg-blue-600 hover:bg-blue-700"
+					label="+ Add files"
+					fullWidth={false}
+					onClick={triggerFileInput}
+				/>
 				<input
 					type="file"
 					id="file-input"
