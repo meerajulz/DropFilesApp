@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { createEventDispatcher } from 'svelte';
 	import Button from './ui/Button.svelte';
 	import Logo from './ui/Logo.svelte';
 	import InputField from './ui/InputField.svelte';
@@ -11,20 +10,29 @@
 	let confirmPassword = '';
 	let error = '';
 
+	// Validation flags when switching modes
 	let isEmailValid = false;
 	let isPasswordValid = false;
-	let isConfirmPasswordValid = true; // Default to true for login, only needed for signup
+	let isConfirmPasswordValid = isLogin;
 
-	function toggleForm() {
-		isLogin = !isLogin;
+	// Helper to reset form fields and validation flags
+	function resetForm() {
 		email = '';
 		password = '';
 		confirmPassword = '';
+		error = '';
+		isEmailValid = false;
+		isPasswordValid = false;
+		isConfirmPasswordValid = true;
+	}
+	// Toggle between login and signup modes
+	function toggleForm() {
+		isLogin = !isLogin;
+		resetForm();
 	}
 
 	function handleFormSubmit(event: { preventDefault: () => void }) {
 		event.preventDefault();
-
 		// If it's sign-up, make sure passwords match
 		if (!isLogin && password !== confirmPassword) {
 			error = 'Passwords do not match.';
@@ -38,10 +46,19 @@
 	const validateEmail = (value: string) => value.includes('@');
 
 	// Password length validation logic
-	const validatePassword = (value: string) => value.length > 3;
+	const validatePassword = (value: string) => {
+		isPasswordValid = value.length > 3;
+		return isPasswordValid;
+	};
 
 	// Password confirmation validation logic
-	const validateConfirmPassword = (value: string) => value === password;
+	const validateConfirmPassword = (value: string) => {
+		isConfirmPasswordValid = value === password;
+		return isConfirmPasswordValid;
+	};
+
+	// Handle password updates to re-validate confirmPassword
+	$: validateConfirmPassword(confirmPassword);
 </script>
 
 <main class="max-w-md mx-auto mt-20 bg-white p-8 rounded shadow-lg">
@@ -91,9 +108,6 @@
 				label={isLogin ? 'Login' : 'Sign Up'}
 				fullWidth
 				disabled={!isEmailValid || !isPasswordValid || (!isLogin && !isConfirmPasswordValid)}
-				customStyles={!isEmailValid || !isPasswordValid || (!isLogin && !isConfirmPasswordValid)
-					? 'bg-blue-300 cursor-not-allowed'
-					: 'bg-blue-600 hover:bg-blue-600'}
 			/>
 		</p>
 	</form>

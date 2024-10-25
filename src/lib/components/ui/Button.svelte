@@ -8,13 +8,13 @@
 </script>
 
 <button
-	{type}
-	class="text-white py-2 px-4 rounded shadow focus:outline-none
+	class="text-white py-2 px-4 rounded shadow focus:outline-none text-base
 		{fullWidth ? 'w-full' : ''} 
 		{customStyles} 
-		{disabled ? 'bg-blue-100 cursor-not-allowed' : ''}"
+		{disabled ? 'bg-blue-100 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}"
 	on:click={onClick}
 	{disabled}
+	{type}
 >
 	{label}
 </button>

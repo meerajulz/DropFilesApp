@@ -49,6 +49,7 @@
 		on:input={handleInput}
 		on:blur={handleBlur}
 		class="w-full p-2 border rounded {showError ? 'border-red-500' : ''}"
+		autocomplete="on"
 	/>
 	{#if showError}
 		<p class="text-red-500 text-xs italic">{errorMessage}</p>
